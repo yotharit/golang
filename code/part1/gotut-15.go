@@ -34,8 +34,9 @@ func main() {
 	for _, Location := range s.Locations {
 		link := strings.Split(Location, "/")
 		to := link[len(link)-1]
+		name := strings.Split(to, ".")[0]
 
-		resp, _ := http.Get("https://www.washingtonpost.com/news-sitemaps/" + to)
+		resp, _ := http.Get("https://www.washingtonpost.com/news-sitemaps/" + name + ".xml")
 		bytes, _ := ioutil.ReadAll(resp.Body)
 
 		xml.Unmarshal(bytes, &n)
